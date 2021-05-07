@@ -1,9 +1,11 @@
+package model;
+
 import utils.Validators;
 
 /**
  * Pessoa que estuda na escola.
- * Um aluno é uma pessoa que estuda na escola. O aluno frequenta uma Turma
- * {@link Turma}, tem Notas {@link Nota} e Boletim {@link Boletim}.
+ * Um aluno é uma pessoa que estuda na escola. Realiza
+ * {@link Prova}s e tem um Boletim {@link Boletim}.
  *
  * @author LeviDev <samuel.levi.alves@outlook.com>
  * @see Turma
@@ -12,20 +14,20 @@ import utils.Validators;
  */
 public class Aluno {
 
-    private String name;
+    private String nome;
 
 
-    private String surname;
+    private String sobrenome;
 
 
-    private Integer age;
+    private Integer idade;
 
     /**
      * Primeiro nome do aluno.
      * @return String name.
      */
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     /**
@@ -34,19 +36,19 @@ public class Aluno {
      *
      * @param inputName String
      */
-    public void setName(String inputName) throws Exception {
+    public void setNome(String inputName) throws Exception {
         if (!Validators.onlyValidChars(inputName)) {
             throw new Exception("Please, input only alphabetichal characters!");
         }
-        this.name = inputName;
+        this.nome = inputName;
     }
 
     /**
      * Último sobrenome do aluno.
      * @return String surname.
      */
-    public String getSurname() {
-        return surname;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
     /**
@@ -55,18 +57,18 @@ public class Aluno {
      *
      * @param inputSurname String
      */
-    public void setSurname(String inputSurname) throws Exception {
+    public void setSobrenome(String inputSurname) throws Exception {
         if (!Validators.onlyValidChars(inputSurname)) {
             throw new Exception("Please, input only alphabetichal characters!");
         }
-        this.surname = inputSurname;
+        this.sobrenome = inputSurname;
     }
 
     /**
      * Idade do aluno.
      */
-    public Integer getAge() {
-        return age;
+    public Integer getIdade() {
+        return idade;
     }
 
     /**
@@ -76,12 +78,12 @@ public class Aluno {
      * @param inputAge
      * @return Integer inputAge
      */
-    public void setAge(Integer inputAge) throws Exception {
+    public void setIdade(Integer inputAge) throws Exception {
         if (inputAge < 0 || inputAge >= 130) {
             throw new Exception("Age must be bigger than 0 and smaller than " +
                     "130!");
         }
-        this.age = inputAge;
+        this.idade = inputAge;
     }
 
 }

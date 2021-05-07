@@ -1,3 +1,4 @@
+import model.Aluno;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -5,56 +6,67 @@ import static org.junit.Assert.*;
 public class AlunoTest {
 
     @org.junit.Test(expected = Exception.class)
-    public void testSetNomeComNumero() throws Exception {
+    public void testSetNomeComNumeros() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setName("Samuel123");
+        aluno.setNome("Samuel123");
     }
 
     @org.junit.Test(expected = Exception.class)
-    public void testSetNomeComCaractereProibido() throws Exception {
+    public void testSetNomeComCaracteresProibidos() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setName("Samuel.");
+        aluno.setNome("Samuel.");
     }
 
     @org.junit.Test
-    public void testSetNomeSemNumero() {
+    public void testSetNomeValido() {
         Aluno aluno = new Aluno();
         try {
-            aluno.setName("Samuel");
+            aluno.setNome("Samuel");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull((aluno.getName()));
+        assertNotNull((aluno.getNome()));
     }
 
     @org.junit.Test(expected = Exception.class)
-    public void testSetSobrenomeComNumero() throws Exception {
+    public void testSetSobrenomeComNumeros() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setSurname("Levi123");
+        aluno.setSobrenome("Levi123");
     }
 
     @org.junit.Test(expected = Exception.class)
-    public void testSetSobrenomeComCaractereProibido() throws Exception {
+    public void testSetSobrenomeComCaracteresProibidos() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setName("Levi#");
+        aluno.setNome("Levi#");
+    }
+
+    @org.junit.Test
+    public void testSetSobrenomeValido() {
+        Aluno aluno = new Aluno();
+        try {
+            aluno.setNome("Levi");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertNotNull((aluno.getNome()));
     }
 
     @Test(expected = Exception.class)
-    public void testSetAgaBiggerThan130() throws Exception {
+    public void testSetIdadeMaiorQue130() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setAge(131);
+        aluno.setIdade(131);
     }
 
     @Test(expected = Exception.class)
-    public void testSetAgaSmallerThan0() throws Exception {
+    public void testSetIdadeMenorQue0() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setAge(-1);
+        aluno.setIdade(-1);
     }
 
     @Test
-    public void testSetValidAge() throws Exception {
+    public void testSetIdadeValida() throws Exception {
         Aluno aluno = new Aluno();
-        aluno.setAge(20);
-        assertEquals(20, (int) aluno.getAge());
+        aluno.setIdade(20);
+        assertEquals(20, (int) aluno.getIdade());
     }
 }
