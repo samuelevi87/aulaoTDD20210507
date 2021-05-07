@@ -29,14 +29,13 @@ public class Aluno {
      * Define o nome do aluno.
      * Aceita apenas letras.
      *
-     * @param nome
+     * @param nome String
      */
-    public void setNome(String nome) {
+    public void setNome(String nome) throws Exception {
         if (nome.matches(".*[0-9].*")) {
-            this.nome = null;
-        }else {
-            this.nome = nome;
+            throw new Exception("TÁ MALUCO MERMÃO??? Não utilize números!");
         }
+            this.nome = nome;
     }
 
     /**

@@ -2,17 +2,20 @@ import static org.junit.Assert.*;
 
 public class AlunoTest {
 
-    @org.junit.Test
-    public void testSetNomeComNumero() {
+    @org.junit.Test(expected = Exception.class)
+    public void testSetNomeComNumero() throws Exception {
         Aluno aluno = new Aluno();
         aluno.setNome("Samuel123");
-        assertNull((aluno.getNome()));
-    }
+}
 
     @org.junit.Test
     public void testSetNomeSemNumero() {
         Aluno aluno = new Aluno();
-        aluno.setNome("Samuel");
+        try {
+            aluno.setNome("Samuel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertNotNull((aluno.getNome()));
     }
 }
