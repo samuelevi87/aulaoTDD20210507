@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Reúne as {@link Prova}s de um {@link Aluno}.
@@ -12,8 +13,8 @@ import java.util.ArrayList;
  * @author LeviDev samuel.levi.alves@outlook.com
  */
 public class Boletim {
-    private Aluno aluno;
-    private Integer periodo;
+    private final Aluno aluno;
+    private final Integer periodo;
     private Double media;
     private ArrayList<Prova> provas = new ArrayList<Prova>();
 
@@ -24,7 +25,6 @@ public class Boletim {
      *
      * @param aluno
      * @param periodo
-     * @param media
      */
     public Boletim(Aluno aluno, Integer periodo) {
         this.aluno = aluno;
@@ -90,11 +90,10 @@ public class Boletim {
      * Calcula a média ponderada das provas.
      */
     public void calcularMedia() {
-        Double somatorio = 0d;
-        for (Prova prova : provas) {
-            somatorio += prova.getNota();
-        }
-        this.media = somatorio / provas.size();
+        double soma =
+                provas.stream().collect(Collectors.summingDouble(Prova::getNota));
+        this.media = soma / provas.size();
+        System.out.println(media);
     }
 
     /**
