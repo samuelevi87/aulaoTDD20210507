@@ -1,27 +1,31 @@
 package Prova;
 
-import Boletim.Boletim;
-
-import java.util.ArrayList;
+import persistence.ArrayListPersistenceProva;
 
 public class ProvaDao {
-    Boletim boletim;
+    ArrayListPersistenceProva db;
 
-    public ProvaDao(Boletim boletim) {
-        this.boletim = boletim;
+    public ProvaDao(ArrayListPersistenceProva db) {
+        this.db = db;
     }
 
     public void removeAll() {
-        boletim.resetProvas();
+        db.removeAll();
     }
 
-    public void remove(int index) {
-        ArrayList<Prova> provas = boletim.getProvas();
-        provas.remove(index);
+    public void remove(Integer index) {
+        db.remove(index);
     }
 
-    public void add(Prova prova) {
-        ArrayList<Prova> provas = boletim.getProvas();
-        provas.add(prova);
+    public Prova add(Prova prova) {
+        return db.add(prova);
+    }
+
+    public Prova get(int index) {
+        return db.get(index);
+    }
+
+    public ArrayListPersistenceProva getDb() {
+        return db;
     }
 }

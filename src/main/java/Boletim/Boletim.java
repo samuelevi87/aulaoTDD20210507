@@ -15,106 +15,84 @@ import java.util.ArrayList;
  * @author LeviDev samuel.levi.alves@outlook.com
  */
 public class Boletim {
-    private final Aluno aluno;
-    private final Integer periodo;
+
+    private Integer id;
+    private Aluno aluno;
+    private Integer periodo;
     private Double media;
-    private ArrayList<Prova> provas = new ArrayList<>();
+    private ArrayList<Prova> provas;
 
     /**
-     * Cria um novo Boletim.
-     * O boletim é criado a partir de um aluno e um período. Conforme as provas
-     * são adicionadas a média é recalculada.
+     * Cria um novo Boletim
      *
-     * @param aluno a quem pertence o boletim
-     * @param periodo ao qual o boletim pertence
+     * O Boletim é criado a partir de um aluno e um período. Conforme as provas
+     * são adicionadas, realiza-se o cálculo atualizado da média.
+     *
+     * @param aluno
+     * @param periodo
+     * @param media
      */
     public Boletim(Aluno aluno, Integer periodo) {
         this.aluno = aluno;
         this.periodo = periodo;
         this.media = 0.0;
-        this.provas = new ArrayList<>();
+        this.provas = new ArrayList<Prova>();
     }
+
+    /**
+     * Id do Boletim
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     /**
      * Aluno do boletim
      *
-     * @return aluno
+     * @return
      */
     public Aluno getAluno() {
         return aluno;
     }
 
     /**
-     * Periodo no formato YYYMM.
+     * Período no formato YYYYMM
      *
-     * @return periodo
+     * @return
      */
     public Integer getPeriodo() {
         return periodo;
     }
 
     /**
-     * Retorna a média das provas atualizadas.
+     * Retorna a média das provas atualizada.
      *
-     * @return media
+     * @return
      */
     public Double getMedia() {
         return media;
     }
 
     /**
-     * Retorna uma lista de provas.
+     * Retorna todas as provas.
      *
-     * @return ArrayList
+     * @return ArrayList<Prova>
      */
     public ArrayList<Prova> getProvas() {
         return this.provas;
     }
 
-    /**
-     * Adiciona uma avalização ao boletim.
-     * Ao adicionar a Prova, a média é recalculada.
-     *
-     * @param prova a ser adicionada
-     */
-    public void addProva(Prova prova) {
-        provas.add(prova);
-        this.calcularMedia();
-    }
-
-    /**
-     * Remove uma avalização ao boletim.
-     * Ao remover uma prova a média é recalculada.
-     *
-     * @param index da prova a ser removida
-     */
-    public void removeProva(int index) {
-        try {
-            this.provas.remove(index);
-        }catch (Exception e) {
-            System.out.println("Prova não removida. Erro: " + e.getMessage());
-        }
-        this.calcularMedia();
+    public void setMedia(double media) {
+        this.media = media;
     }
 
     public void resetProvas() {
-        this.provas = new ArrayList<>();
-    }
-
-    /**
-     * Calcula a média ponderada das provas.
-     */
-    public void calcularMedia() {
-        double total = 0.0;
-        int pesos = 0;
-        for(Prova prova : provas) {
-            total += prova.getNota() * prova.getPeso();
-            pesos += prova.getPeso();
-        }
-        this.media = total / pesos;
-    }
-
-    public void setMedia(double media) {
-        this.media = media;
+        this.provas = new ArrayList<Prova>();
     }
 }

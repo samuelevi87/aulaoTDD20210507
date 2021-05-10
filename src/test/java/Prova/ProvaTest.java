@@ -39,6 +39,7 @@ public class ProvaTest {
     @Test
     public void testGetPeriodo(){
         assertNotNull(prova.getPeriodo());
+        assertEquals(periodoParam, (int) prova.getPeriodo());
     }
 
     @Test

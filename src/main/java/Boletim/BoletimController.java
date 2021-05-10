@@ -1,26 +1,57 @@
 package Boletim;
 
-import Prova.Prova;
-import Prova.ProvaDao;
+import Prova.*;
+import persistence.ArrayListPersistenceBoletim;
+
+import java.util.ArrayList;
 
 public class BoletimController {
 
     private Boletim boletim;
+    private BoletimDao boletimDao;
+    private ArrayListPersistenceBoletim dbBoletim = new ArrayListPersistenceBoletim();
 
+    /**
+     * Classe de controle do boletim
+     * <p>
+     * Recebe um boletim e verifica se o boletim já existe na persistência.
+     * Se não existir, cria um novo.
+     *
+     * @param boletimEntrada
+     */
     public BoletimController(Boletim boletimEntrada) {
+        this.boletimDao = new BoletimDao(dbBoletim);
         this.boletim = boletimEntrada;
     }
 
     /**
-     * Adiciona uma avaliacao ao boletim.
+     * Adiciona um boletim.
+     * Cria um novo boletim, caso o Id seja nulo, retorna o boletim, caso
+     * o Id já exista.
+     * @return boletim conforme parâmetro.
+     */
+    public Boletim addBoletim() {
+        if (this.boletim.getId() == null) {
+            return this.boletimDao.add(this.boletim);
+        }
+        return this.boletim;
+    }
+
+    /**
+     * Adiciona uma avaliação ao boletim.
      * <p>
-     * Ao adicionar a Prova, a media e recalculada.
+     * Ao adicionar a Prova, a méia é recalculada.
      *
      * @param prova
      */
     public void addProva(Prova prova) {
-        ProvaDao provaDao = new ProvaDao(boletim);
-        provaDao.add(prova);
+        ProvaController provaController = new ProvaController(prova);
+        if (prova.getId() != null) {
+            provaController.addProva();
+        } else {
+            provaController.getById(prova.getId());
+        }
+        boletim.getProvas().add(prova);
         this.calcularMedia();
     }
 
@@ -29,15 +60,12 @@ public class BoletimController {
      * <p>
      * Ao remover a Prova, a média é recalculada.
      *
-     * @param index
+     * @param index da prova que será removida.
      */
     public void removeProva(int index) {
-        try {
-            ProvaDao provaDao = new ProvaDao(boletim);
-            provaDao.remove(index);
-        } catch (Exception e) {
-            System.out.println("Prova não removida. Erro:" + e.getMessage());
-        }
+        ProvaController provaController = new ProvaController(index);
+        provaController.removeProva();
+        boletim.getProvas().remove(index);
         this.calcularMedia();
     }
 
@@ -46,16 +74,21 @@ public class BoletimController {
      * Remove todas as provas.
      */
     public void removeTodasProvas() {
-        ProvaDao provaDao = new ProvaDao(boletim);
-        provaDao.removeAll();
+        ArrayList<Prova> provas = this.boletim.getProvas();
+
+        for (Prova prova : provas) {
+            ProvaController provaController = new ProvaController(prova);
+            provaController.removeProva();
+        }
+        this.boletim.getProvas().clear();
         this.calcularMedia();
     }
 
     /**
-     * Calcula a media ponderada das provas.
+     * Calcula a média ponderada das provas.
      * <p>
-     * Realiza o calculo da media das notas das provas e atualiza o valor da
-     * media.
+     * Realiza o cÃ¡lculo da média das notas das provas e atualiza o valor da
+     * média.
      */
     private void calcularMedia() {
         Double total = 0.0;

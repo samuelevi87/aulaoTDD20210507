@@ -12,6 +12,8 @@ import model.Materia;
  * é registrada no {@Link Boletim.Boletim} e verifica se o aluno foi aprovado.
  */
 public class Prova {
+
+    private Integer id;
     private Integer periodo;
     private Aluno aluno;
     private Materia materia;
@@ -34,6 +36,14 @@ public class Prova {
         this.materia = materia;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     /**
      * Período no formato YYYYMM.
      *
@@ -52,6 +62,10 @@ public class Prova {
         return aluno;
     }
 
+    /**
+     * Matéria da prova
+     * @return materia
+     */
     public Materia getMateria() {
         return materia;
     }
