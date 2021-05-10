@@ -18,15 +18,15 @@ public class Boletim {
     private final Aluno aluno;
     private final Integer periodo;
     private Double media;
-    private ArrayList<Prova> provas = new ArrayList<Prova>();
+    private ArrayList<Prova> provas = new ArrayList<>();
 
     /**
      * Cria um novo Boletim.
      * O boletim é criado a partir de um aluno e um período. Conforme as provas
      * são adicionadas a média é recalculada.
      *
-     * @param aluno
-     * @param periodo
+     * @param aluno a quem pertence o boletim
+     * @param periodo ao qual o boletim pertence
      */
     public Boletim(Aluno aluno, Integer periodo) {
         this.aluno = aluno;
@@ -38,7 +38,7 @@ public class Boletim {
     /**
      * Aluno do boletim
      *
-     * @return
+     * @return aluno
      */
     public Aluno getAluno() {
         return aluno;
@@ -75,7 +75,7 @@ public class Boletim {
      * Adiciona uma avalização ao boletim.
      * Ao adicionar a Prova, a média é recalculada.
      *
-     * @param prova
+     * @param prova a ser adicionada
      */
     public void addProva(Prova prova) {
         provas.add(prova);
@@ -86,7 +86,7 @@ public class Boletim {
      * Remove uma avalização ao boletim.
      * Ao remover uma prova a média é recalculada.
      *
-     * @param index
+     * @param index da prova a ser removida
      */
     public void removeProva(int index) {
         try {
@@ -97,7 +97,7 @@ public class Boletim {
         this.calcularMedia();
     }
 
-    public void removeTodasAsProvas() {
+    public void resetProvas() {
         this.provas = new ArrayList<>();
     }
 
@@ -105,7 +105,7 @@ public class Boletim {
      * Calcula a média ponderada das provas.
      */
     public void calcularMedia() {
-        Double total = 0.0;
+        double total = 0.0;
         int pesos = 0;
         for(Prova prova : provas) {
             total += prova.getNota() * prova.getPeso();
@@ -114,4 +114,7 @@ public class Boletim {
         this.media = total / pesos;
     }
 
+    public void setMedia(double media) {
+        this.media = media;
+    }
 }

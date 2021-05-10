@@ -1,7 +1,6 @@
 package Boletim;
 
 import Aluno.Aluno;
-import Boletim.Boletim;
 import Prova.Prova;
 import model.Materia;
 import org.junit.BeforeClass;
@@ -38,7 +37,7 @@ public class BoletimTest {
 
     @Test
     public void testGetMedia() {
-        boletim.removeTodasAsProvas();
+        boletim.resetProvas();
         Materia materia = new Materia();
         Prova prova = new Prova(periodoPadrao, boletim.getAluno(), materia);
         try {
@@ -52,7 +51,7 @@ public class BoletimTest {
 
     @Test
     public void testAddProva() {
-        boletim.removeTodasAsProvas();
+        boletim.resetProvas();
         Materia materia = new Materia();
         Prova prova = new Prova(boletim.getPeriodo(), boletim.getAluno(),
                 materia);
@@ -65,7 +64,7 @@ public class BoletimTest {
         Materia materia = new Materia();
         Prova prova = new Prova(periodoPadrao, boletim.getAluno(), materia);
         Prova prova2 = new Prova(periodoPadrao, boletim.getAluno(), materia);
-        boletim.removeTodasAsProvas();
+        boletim.resetProvas();
         boletim.addProva(prova);
         boletim.addProva(prova2);
         boletim.removeProva(0);
@@ -77,13 +76,13 @@ public class BoletimTest {
         Materia materia = new Materia();
         Prova prova = new Prova(periodoPadrao, boletim.getAluno(), materia);
         boletim.addProva(prova);
-        boletim.removeTodasAsProvas();
+        boletim.resetProvas();
         assertFalse(boletim.getProvas().size() > 0);
     }
 
     @Test
     public void calcularMedia() {
-        boletim.removeTodasAsProvas();
+        boletim.resetProvas();
         Materia materia = new Materia();
         Prova prova1 = new Prova(periodoPadrao, boletim.getAluno(), materia);
         try {
