@@ -1,5 +1,9 @@
-package model;
+package Boletim;
 
+import Aluno.Aluno;
+import Boletim.Boletim;
+import Prova.Prova;
+import model.Materia;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,7 +37,7 @@ public class BoletimTest {
     }
 
     @Test
-    public void getMedia() {
+    public void testGetMedia() {
         boletim.removeTodasAsProvas();
         Materia materia = new Materia();
         Prova prova = new Prova(periodoPadrao, boletim.getAluno(), materia);

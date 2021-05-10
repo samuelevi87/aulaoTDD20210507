@@ -1,5 +1,8 @@
-package model;
+package Aluno;
 
+import Boletim.Boletim;
+import Prova.Prova;
+import model.Turma;
 import utils.Validators;
 
 /**

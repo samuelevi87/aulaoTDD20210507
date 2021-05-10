@@ -1,7 +1,9 @@
-package model;
+package Boletim;
+
+import Aluno.Aluno;
+import Prova.Prova;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * Reúne as {@link Prova}s de um {@link Aluno}.
@@ -45,21 +47,28 @@ public class Boletim {
     /**
      * Periodo no formato YYYMM.
      *
-     * @return
+     * @return periodo
      */
     public Integer getPeriodo() {
         return periodo;
     }
 
     /**
-     * Retorna a médida das provas atualizadas.
+     * Retorna a média das provas atualizadas.
      *
-     * @return
+     * @return media
      */
     public Double getMedia() {
-        this.calcularMedia();
         return media;
+    }
 
+    /**
+     * Retorna uma lista de provas.
+     *
+     * @return ArrayList
+     */
+    public ArrayList<Prova> getProvas() {
+        return this.provas;
     }
 
     /**
@@ -70,6 +79,7 @@ public class Boletim {
      */
     public void addProva(Prova prova) {
         provas.add(prova);
+        this.calcularMedia();
     }
 
     /**
@@ -79,7 +89,12 @@ public class Boletim {
      * @param index
      */
     public void removeProva(int index) {
-        this.provas.remove(index);
+        try {
+            this.provas.remove(index);
+        }catch (Exception e) {
+            System.out.println("Prova não removida. Erro: " + e.getMessage());
+        }
+        this.calcularMedia();
     }
 
     public void removeTodasAsProvas() {
@@ -90,18 +105,13 @@ public class Boletim {
      * Calcula a média ponderada das provas.
      */
     public void calcularMedia() {
-        double soma =
-                provas.stream().collect(Collectors.summingDouble(Prova::getNota));
-        this.media = soma / provas.size();
-        System.out.println(media);
+        Double total = 0.0;
+        int pesos = 0;
+        for(Prova prova : provas) {
+            total += prova.getNota() * prova.getPeso();
+            pesos += prova.getPeso();
+        }
+        this.media = total / pesos;
     }
 
-    /**
-     * Retorna uma lista de provas.
-     *
-     * @return ArrayList
-     */
-    public ArrayList<Prova> getProvas() {
-        return provas;
-    }
 }

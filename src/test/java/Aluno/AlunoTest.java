@@ -1,4 +1,6 @@
-import model.Aluno;
+package Aluno;
+
+import Aluno.Aluno;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
